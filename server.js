@@ -1,5 +1,5 @@
 import http, { STATUS_CODES } from 'http'
-const PoRT = 8000;
+const PoRT = process.env.PoRT;
 
 const server = http.createServer((req, res) => {
 
