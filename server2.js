@@ -16,8 +16,10 @@ const server = createServer((req, res) => {
         res.write(JSON.stringify(users));
         res.end();
     } else {
-        res.writeHead(404, { 'Content-type': 'application/json' })
-        res.write(JSON.stringify({message: 'Not Found'}))
+        res.setHeader('Content-type', 'application/json');
+        res.statusCode = 404;
+        res.write(JSON.stringify({ message: 'Not Found' }));
+        res.end();
     }
 });
 
