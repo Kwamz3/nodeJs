@@ -1,5 +1,14 @@
 import http, { STATUS_CODES } from 'http'
+import fs from 'fs/promises';
+import url from 'url';
 const PORT = process.env.PORT;
+
+// Get current path
+// gives you the current filename and the path
+const __filename = url.fileURLToPath(import.meta.url); 
+
+// gives you the directory in which the file can be found
+__dirname
 
 const server = http.createServer((req, res) => {
 
