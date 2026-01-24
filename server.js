@@ -18,14 +18,14 @@ const server = http.createServer((req, res) => {
     // res.end(JSON.stringify({ message: 'Server Error' }))
 
     if (req.url === '/') {
-        res.writeHead(200, { 'content-type': 'text/html' })
-        res.end(<h1>Homepage</h1>)
+        res.writeHead(200, {'content-type': 'text/html'});
+        res.end('<h1>Homepage</h1>')
     } else if (req.url === '/about') {
-        res.writeHead(200, { 'content-type': 'text/html' })
-        res.end(<h1>About</h1>)
+        res.writeHead(200, {'content-type': 'text/html'});
+        res.end('<h1>About</h1>')
     } else {
-        res.writeHead(404, { 'content-type': 'text/html' })
-        res.end(<h1>Not found</h1>)
+        res.writeHead(404, {'content-type': 'text/html'});
+        res.end('<h1>Not Found</h1>')
     }
 })
 
