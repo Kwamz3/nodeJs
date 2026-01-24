@@ -2,6 +2,7 @@ import http, { STATUS_CODES } from 'http'
 import fs from 'fs/promises';
 import url from 'url';
 import path from 'path';
+import { error } from 'console';
 const PORT = process.env.PORT;
 
 // Get current path
@@ -11,7 +12,7 @@ const __filename = url.fileURLToPath(import.meta.url);
 // gives you the directory in which the file can be found
 const __dirname = path.dirname(__filename);
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
 
     // you can send a response body through the "res.end"
     // res.write("Hello World!")
@@ -47,24 +48,30 @@ const server = http.createServer((req, res) => {
     //     res.end('Server Error')
     // }
     
-    // Using the __filename object to load the html pages
+    // Using the "__filename" and "__dirname" object to load the html pages
     
     try {
         if (req.method === 'GET') {
             let filePath;
             if (req.url === '/') {
-                
+                filePath = path.join(__dirname, 'public', 'index.html')
             } else if (req.url === '/about') {
-                
+                filePath = path.join(__dirname, 'public', 'about.html')
             } else {
-               
+               throw new Error('Not Found')
             } 
+
+            const data = await fs.readFile(filePath);
+            res.setHeader('Content-type', 'text/html');
+            res.write(data);
+            res.end();
+
         } else {
             throw new Error('Method not allowed')
         }
     } catch (error) {
-        res.writeHead(500, {'content-type': 'text/plain'});
-        res.end('Server Error')
+        res.writeHead(404, {'content-type': 'text/plain'});
+        res.end('Not Found')
     }
 
 
