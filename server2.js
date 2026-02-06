@@ -15,6 +15,8 @@ const server = createServer((req, res) => {
         res.setHeader('Content-type', 'application/json');
         res.write(JSON.stringify(users));
         res.end();
+    } else if (req.url.match(/^\/api\/users\/([0-9]+)/)) {
+        
     } else {
         res.setHeader('Content-type', 'application/json');
         res.statusCode = 404;
